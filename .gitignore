@@ -1,0 +1,8 @@
+*.aux
+*.bbl
+*.blg
+*.gz
+*.out
+*.pdf
+*.txt
+*.log

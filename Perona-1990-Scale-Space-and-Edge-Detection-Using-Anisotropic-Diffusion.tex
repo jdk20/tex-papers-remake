@@ -1,0 +1,60 @@
+\documentclass[10pt,letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+
+\title{Scale-Space and Edge Detection Using Anisotropic Diffusion}
+\author{Pietro Perona and Jitendra Malik\footnote{Manuscript received May 15, 1989; revised February 12, 1990. Recommended for acceptance by R.J. Woodham. This work was supported by the Semiconductor Research Corporation under Grant 82-11-008 to P. Perona, by an IBM faculty development award and a National Science Foundation PY1 award to J. Malik, and by the Defense Advanced Research Projects Agency under Contract N00039-88-C-0292. The authors are with the Department of Electrical Engineering and Computer Science, University of California, Berkeley, CA 94720. IEEE Log Number 9036110.}}
+\date{July 7, 1990}
+
+\begin{document}
+	\maketitle
+	
+	\begin{abstract}
+		The scale-space technique introduced by Witkin involves generating coarser resolution images by convolving the original image with a Gaussian kernel. This approach has a major drawback: it is difficult to obtain accurately the locations of the ``semantically meaningful" edges at coarse scales. In this paper we suggest a new definition of scale-space, and introduce a class of algorithms that realize it using a diffusion process. The diffusion coefficient is chosen to vary spatially in such a way as to encourage intraregion smoothing in preference to interregion smoothing. It is shown that the ``no new maxima should be generated at coarse scales" property of conventional scale space is preserved. As the region boundaries in our approach remain sharp, we obtain a high quality edge detector which successfully exploits global information. Experimental results are shown on a number of images. The algorithm involves elementary, local operations replicated over the image making parallel hardware implementation feasible.
+	\end{abstract}
+	
+	\paragraph{Index Terms}Adaptive filtering, analog VLSI, edge detection, edge enhancement, nonlinear diffusion, nonlinear filtering, parallel algorithm, scale-space.
+	
+	\section{Introduction}
+	The importance of multiscale descriptions of images has been recognized from the early days of computer vision, e.g., Rosenfeld and Thurston \cite{rosenfeld1971edge}. A clean formalism for this problem is the idea of scale-space filtering introduced by Witkin and further developed in Koenderink, Babaud, Duda, and Witkin \cite{babaud1986uniqueness}, Yuille and Poggio, and Hummel.
+	
+	The essential idea of this approach is quite simple: embed the original image in a family of derived images $I(x,y,t)$ obtained by convolving the original image $I_0(x,y)$ with a Gaussian kernel $G(x,y;t)$ of variance $t$:
+	\begin{equation}
+		I(x,y,t)=I_0(x,y)*G(x,y,;t)
+	\end{equation}
+	
+	Larger values of $t$, the scale-space parameter, correspond to images at coarser resolutions See Fig. 1.
+	
+	As pointed out by Koenderink and Hummel, this one parameter family of derived images may equivalently be viewed as the solution of the heat conduction, or diffusion, equation
+	
+	\begin{equation}
+		I_t= \Delta I=(I_{xx}+Y_{yy})
+	\end{equation}
+	with the initial condition $I(x,y,0)=I_0(x,y)$, the original image.
+	
+	Koenderink motivates the diffusion equation formulation by stating two criteria.
+	
+	\emph{1) Causality:} Any feature at a coarse level of resolution is required to possess a (not necessarily unique) ``cause" at a finer level of resolution although the reverse need not be true. In other words, no spurious detail should be generated when the resolution is diminished.
+	
+	\emph{2) Homogeneity and Isotropy:} The blurring is required to be space invariant.
+	
+	These criteria lead naturally to the diffusion equation formulation. It may be noted that the second criterion is only states for the sake of simplicity. We will have more to say on this later. In fact the major theme of this paper is to replace this criterion by something more useful.
+	
+	It should also be noted that the causality criterion does not force uniquely the choice of a Gaussian to do the blurring, though it is perhaps the simplest. Hummel \cite{hummel1986representations} has made the important observation that a version of the maximum principle from the theory of parabolic differential equations is equivalent to causality. We will discuss this further in Section IV-A.
+	
+	This paper is organized as follows: Section II critiques the standard scale space paradigm and presents an additional set of criteria for obtaining ``semantically meaningful" multiple scale descriptions. In Section III we show that by allowing the diffusion coefficients to vary, one can satisfy these criteria. In Section IV-A the maximum principle is reviewed and used to show how the causality criterion is still satisfied by our scheme. In Section V some experimental results are presented In Section VI we compare our scheme with other edge detection schemes. Section VII presents some concluding remarks.
+	
+	\section{Weakness of the Standard Scale-Space Paradigm}
+	We now examine the adequacy of the standard
+	
+	\begin{equation}
+	I_t=div(c(x,y,t) \nabla I) = c(x,y,t)\Delta I + \nabla c \cdot \nabla I
+	\end{equation}
+	where we indicate with $div$ the divergence operator, and with $\nabla$ and $\Delta$ respectively the gradient and Laplacian operators, with respect to the space variables. It reduces to the isotropic heat diffusion equation $I_t = c\Delta I$ if $c(x,y,t)$ is a constant.
+	
+	\bibliographystyle{ieeetr}
+	\bibliography{Perona-1990}
+	
+\end{document}

@@ -1,0 +1,154 @@
+\documentclass[10pt,letterpaper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{authblk}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[english]{babel}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage{comment}
+\usepackage{microtype}
+\usepackage[square,numbers,sort&compress]{natbib}
+\usepackage{xcolor}
+\usepackage[left=1.00in, right=1.00in, top=1.00in, bottom=1.00in]{geometry}
+
+\usepackage[pdftex,
+pdfauthor={David E. Rumelhart, Geoffrey E. Hinton, and Ronald J. Williams},
+pdftitle={Learning internal representations by error propagation},
+pdfsubject={Artificial Intelligence},
+pdfkeywords={Artificial Intelligence},
+pdfproducer={LaTeX},
+pdfcreator={pdfTeX},
+colorlinks=true,
+linkcolor={black},
+citecolor={green}]{hyperref} % this one has to be last
+
+\title{Learning internal representations by error propagation}
+
+\author[1]{David~E.~Rumelhart}
+\author[2]{Geoffrey~E.~Hinton}
+\author[3]{Ronald~J.~Williams}
+
+\affil[1]{Institute for Cognitive Science, University of California, San Diego}
+\affil[2]{Department of Computer Science, Carnegie-Mellon University}
+\affil[3]{Institute for Cognitive Science, University of California, San Diego}
+
+\date{September 1985}
+
+\begin{document}
+	\maketitle
+	
+	\tableofcontents
+	
+	\begin{abstract}
+		This paper presents a generalization of the perceptron learning procedure for learning the correct sets of connections for arbitrary networks. The rule, called the generalized delta rule, is a simple scheme for implementing a gradient descent method for finding weights that minimize the sum squared error of the system's performance. The major theoretical contribution of the work is the procedure called error propagation, whereby the gradient can be determined by individual units of the network based only on locally available information. The major empirical contribution of the work is to show that the problem of local minima is not serious in this application of gradient descent.
+	\end{abstract}
+	
+	\section{The problem}
+	We now have a rather good understanding of simple two-layer associative networks in which a set of input patterns arriving at an input layer are mapped directly to a set of output patterns at an output layer. Such networks have no \textit{hidden} units. They involve only \textit{input} and \textit{output} units. In these cases there is no \textit{internal representation}. 
+	
+	\begin{table}[h]
+		\label{table-1}
+		\caption{Exclusive-or (XOR)}
+		\begin{center}
+			\begin{tabular}{ccc}
+				\toprule
+				Input Patterns & & Output Patterns \\
+				\midrule
+				00 & $\rightarrow$ & 0 \\
+				01 & $\rightarrow$ & 1 \\
+				10 & $\rightarrow$ & 1 \\
+				11 & $\rightarrow$ & 0 \\
+				\bottomrule
+			\end{tabular}
+		\end{center}
+	\end{table}
+
+	\begin{table}[h]
+	\label{table-2}
+		\caption{Exclusive-or (XOR)}
+		\begin{center}
+			\begin{tabular}{ccc}
+				\toprule
+				Input Patterns & & Output Patterns \\
+				\midrule
+				000 & $\rightarrow$ & 0 \\
+				010 & $\rightarrow$ & 1 \\
+				100 & $\rightarrow$ & 1 \\
+				111 & $\rightarrow$ & 0 \\
+				\bottomrule
+			\end{tabular}
+		\end{center}
+\end{table}
+	
+	\section{The generalized delta rule}
+	The learning procedure we propose involves the presentation of a set of pairs of input and output patterns. The system first uses the input vector to produce its own output vector and then compares this with the \textit{desired output} or \textit{target} vector. If there is no difference, no learning takes place. Otherwise the weights are changed to reduce the difference. In this case, with no hidden units, this generates the standard delta rule as described in Chapters 2 and 11. The rule for changing weights following presentation of input/output pair $p$ is given by
+	\begin{equation}
+		\Delta_p w_{ji} = \eta (t_{pj} - o_{pj}) i_{pi} = \eta \delta_{pj} i_{pi}
+	\end{equation}
+	where $t_{pj}$ is the target input for the $j$th component of the output pattern for pattern $p$, $o_{pj}$ is the $j$th element of the actual output pattern produced by the presentation of input pattern $p$, $i_{pi}$ is the value of the $i$th element of the input pattern, 
+	
+	\subsubsection{The delta rule and gradient descent.}
+	\subsubsection{The delta rule for semilinear activation functions in feedforward networks.}
+	
+	\section{Simulation results}
+	
+	\subsubsection{A useful activation function.}
+	\subsubsection{The learning rate.}
+	\subsubsection{Symmetry breaking.}
+	
+	\subsection{The XOR problem}
+	\subsection{Parity}
+	\subsection{The encoding problem}
+	\subsection{Symmetry}
+	\subsection{Addition}
+	\subsection{The negation problem}
+	\subsection{The T-C problem}
+	\subsection{More simulation results}
+	
+	\section{Some further generalizations}
+	\subsection{The generalized delta rule and sigma-pi units}
+	\subsection{Recurrent nets}
+	\subsubsection{Learning to be a shift register.}
+	\subsubsection{Learning to complete sequences.}
+	
+	\section{Conclusions}
+	\section{References}
+	
+	
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
